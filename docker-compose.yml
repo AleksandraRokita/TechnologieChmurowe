@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:16
+    container_name: erp_db
+    restart: always
+    environment:
+      POSTGRES_USER: OlaJestSuper   
+      POSTGRES_PASSWORD: OlaJestSuper   
+      POSTGRES_DB: erp_main        
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Mówi Dockerowi, żeby zapamiętał dane
+
+volumes:
+  pgdata: # Tworzy wirtualny dysk na dysku Twojego komputera

@@ -1,0 +1,107 @@
+### MIKROSERWIS: BACKEND (PORT 3000)
+
+### Health check
+GET http://localhost:3000
+
+// ===================================================================
+// GET
+// ===================================================================
+
+### Wszyscy użytkownicy
+GET http://localhost:3000/users
+
+### Pobranie użytkownika po ID
+GET http://localhost:3000/users/1
+
+### Wszystkie produkty
+GET http://localhost:3000/products
+
+### Pobranie konkretnego produktu po ID
+GET http://localhost:3000/products/2
+
+// ===================================================================
+// POST (DODAWANIE PRODUKTÓW)
+// ===================================================================
+
+### Nowy produkt 
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "Myszka Logitech MX Master 3S",
+    "price": 499.99,
+    "stock": 25
+}
+
+### Nowy produkt 
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "Klawiatura Keychron K8 Pro",
+    "price": 550.00,
+    "stock": 10
+}
+
+### Nowy produkt 
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "Monitor Dell UltraSharp 27",
+    "price": 1850.00,
+    "stock": 5
+}
+
+### Nowy produkt 
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "Zwykła podkładka pod mysz",
+    "price": 15.50,
+    "stock": 100
+}
+
+// ===================================================================
+// PUT (AKTUALIZACJE)
+// ===================================================================
+
+### Aktualizacja uprawnień - Nadanie uprawnień pracownika
+PUT http://localhost:3000/users/change/1/userrole
+Content-Type: application/json
+
+{
+  "role": "worker"
+}
+
+### Aktualizacja uprawnień - Degradacja do zwykłego usera
+PUT http://localhost:3000/users/change/1/userrole
+Content-Type: application/json
+
+{
+  "role": "user"
+}
+
+### Aktualizacja produktu - Dostawa zmiana ilości w magazynie
+PUT http://localhost:3000/products/2
+Content-Type: application/json
+
+{
+  "stock": 50
+}
+
+### Aktualizacja produktu - Zmiana ceny 
+PUT http://localhost:3000/products/2/price
+Content-Type: application/json
+
+{
+  "price": 1699.99
+}
+
+// ===================================================================
+// DELETE (USUWANIE)
+// ===================================================================
+
+### Usunięcie produktu z bazy 
+DELETE http://localhost:3000/products/2

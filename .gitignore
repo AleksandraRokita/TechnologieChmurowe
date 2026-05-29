@@ -1,0 +1,20 @@
+# Ignoruj pliki instalacyjne backendu (i w przyszłości frontendu)
+backend/node_modules/
+frontend/node_modules/
+orderproducts/node_modules/
+frontend/node_modules/
+
+
+# Ignoruj tajne hasła w backendzie
+backend/.env
+orderproducts/.env
+
+# Ignoruj logi błędów gdziekolwiek powstaną
+*.log
+
+# Pliki systemowe
+.DS_Store
+Thumbs.db
+
+# Ignoruj wygenerowane pliki Prisma
+backend/generated/prisma

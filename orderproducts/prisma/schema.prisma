@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "postgresql"
+}
+model Order {
+  id            Int             @id @default(autoincrement())
+  customer_id   Int
+  order_status  String          @default("not started")
+  order_date    DateTime        @default(now())
+  total_value   Decimal         @db.Decimal(10,2)
+  order_items   OrderProduct[]
+}
+
+model OrderProduct {
+  id             Int     @id @default(autoincrement())
+  order_id       Int
+  product_id     Int
+  quantity       Int
+  product_price  Decimal  @db.Decimal(10, 2)
+  products_value Decimal  @db.Decimal(10, 2)
+  order          Order   @relation(fields: [order_id], references: [id])
+}

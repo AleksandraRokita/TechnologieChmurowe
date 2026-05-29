@@ -1,0 +1,117 @@
+### MIKROSERWIS: ZAMÓWIENIA (PORT 3001)
+
+### Health check
+GET http://localhost:3001/
+
+// // ============================================
+// GET
+// // ============================================
+
+### Wszystkie zamówienia
+GET http://localhost:3001/orders
+
+### Jedno zamówienie
+GET http://localhost:3001/orders/1
+
+### Wszystkie pozycje zamówień (OrderProduct)
+GET http://localhost:3001/order-products
+
+### Produkty konkretnego zamówienia
+GET http://localhost:3001/order-products/1
+
+### Zamówienie nieistniejące - 404
+GET http://localhost:3001/order-products/999
+
+### Historia sprzedaży produktu
+GET http://localhost:3001/order-products/product/1
+
+### Produkt bez historii sprzedaży - 404
+GET http://localhost:3001/order-products/product/999
+
+### Zakupy klienta
+GET http://localhost:3001/order-products/customer/7
+
+### Klient bez zakupów / nieistniejący - 404
+GET http://localhost:3001/order-products/customer/999
+
+// // ============================================
+// POST
+// // ============================================
+
+### Nowe zamówienie (serwer produktów na porcie 3000 musi działać)
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "items": [
+        { "product_id": 12, "quantity": 2 },
+        { "product_id": 11, "quantity": 1 }
+    ]
+}
+
+### Nieistniejący klient - błąd walidacji
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+    "customer_id": 9999,
+    "items": [
+        { "product_id": 1, "quantity": 1 }
+    ]
+}
+
+### Nieistniejący produkt - błąd walidacji
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "items": [
+        { "product_id": 9999, "quantity": 2 }
+    ]
+}
+
+### Przekroczony stan magazynowy - błąd walidacji
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "items": [
+        { "product_id": 12, "quantity": 1000 }
+    ]
+}
+
+### Ujemna ilość produktu - błąd walidacji
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "items": [
+        { "product_id": 12, "quantity": -5 }
+    ]
+}
+
+### Zerowa ilość produktu - błąd walidacji
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "items": [
+        { "product_id": 12, "quantity": 0 }
+    ]
+}
+
+// // ============================================
+// PUT
+// // ============================================
+### Zmiana statusu zamówienia
+PUT http://localhost:3001/orders/1/status
+Content-Type: application/json
+
+{
+    "status": "shipped"
+}
